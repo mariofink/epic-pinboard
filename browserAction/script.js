@@ -4,7 +4,12 @@ const status = document.getElementById("status");
 
 const loadBookmarksButton = document.getElementById("loadBookmarks");
 loadBookmarksButton.addEventListener("click", e => {
-  background.loadBookmarks();
+  background.loadBookmarks().then(bookmarks => {
+    bookmarks.map(post => {
+      console.log(post.getAttribute("href"));
+      return post;
+    });
+  });
 });
 
 const loginButton = document.getElementById("login");

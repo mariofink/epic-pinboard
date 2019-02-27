@@ -36,12 +36,7 @@ async function loadBookmarks() {
       .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
       .then(data => {
         const posts = [...data.children[0].children];
-        console.log("----", posts);
-        posts.map(post => {
-          console.log(post.getAttribute("href"));
-          return post;
-        });
-        resolve(data);
+        resolve(posts);
       })
       .catch(err => {
         console.error("Could not load bookmarks", err);
