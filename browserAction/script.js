@@ -1,8 +1,5 @@
-document.getElementById("myHeading").style.color = "red";
-
 const background = browser.extension.getBackgroundPage();
 
-const loginForm = document.getElementById("loginForm");
 const status = document.getElementById("status");
 
 const loadBookmarksButton = document.getElementById("loadBookmarks");
@@ -10,11 +7,11 @@ loadBookmarksButton.addEventListener("click", e => {
   background.loadBookmarks();
 });
 
-const url = "https://api.pinboard.in/v1/user/api_token";
-loginForm.addEventListener("submit", e => {
+const loginButton = document.getElementById("login");
+loginButton.addEventListener("click", e => {
   e.preventDefault();
-  const token = document.getElementById("apitoken").value;
-  fetch(url + `?auth_token=${token}`, options)
+  background
+    .login()
     .then(response => {
       console.log("RESPONSE", response);
       status.innerHTML = "Successfully logged in";
