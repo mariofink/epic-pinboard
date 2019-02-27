@@ -1,17 +1,16 @@
 document.getElementById("myHeading").style.color = "red";
 
+const background = browser.extension.getBackgroundPage();
+
 const loginForm = document.getElementById("loginForm");
 const status = document.getElementById("status");
 
-const url = "https://api.pinboard.in/v1/user/api_token";
-const options = {
-  method: "GET",
-  mode: "cors",
-  headers: {
-    "Content-Type": "application/json"
-  }
-};
+const loadBookmarksButton = document.getElementById("loadBookmarks");
+loadBookmarksButton.addEventListener("click", e => {
+  background.loadBookmarks();
+});
 
+const url = "https://api.pinboard.in/v1/user/api_token";
 loginForm.addEventListener("submit", e => {
   e.preventDefault();
   const token = document.getElementById("apitoken").value;
