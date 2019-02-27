@@ -18,9 +18,11 @@ loginForm.addEventListener("submit", e => {
   fetch(url + `?auth_token=${token}`, options)
     .then(response => {
       console.log("RESPONSE", response);
+      status.innerHTML = "Successfully logged in";
     })
     .catch(err => {
       console.error(err);
+      status.innerHTML = "Error during login";
     });
   status.innerHTML = "Submitted";
 });
