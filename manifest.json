@@ -7,18 +7,12 @@
     "64": "icons/icon.png"
   },
   "background": {
-    "scripts": [
-      "background_script.js"
-    ]
+    "scripts": ["background_script.js"]
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://*.mozilla.org/*"
-      ],
-      "js": [
-        "content_script.js"
-      ]
+      "matches": ["*://*/*"],
+      "js": ["content_script.js"]
     }
   ],
   "browser_action": {
@@ -37,5 +31,6 @@
   },
   "options_ui": {
     "page": "options/index.html"
-  }
+  },
+  "permissions": ["<all_urls>"]
 }
