@@ -1,0 +1,23 @@
+{
+  "name": "pinboard-plusplus",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariofink/pinboard-plusplus.git"
+  },
+  "author": "Mario Fink",
+  "bugs": {
+    "url": "https://github.com/mariofink/pinboard-plusplus/issues"
+  },
+  "homepage": "https://github.com/mariofink/pinboard-plusplus#readme",
+  "devDependencies": {
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  }
+}
