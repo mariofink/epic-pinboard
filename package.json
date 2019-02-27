@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mariofink/pinboard-plusplus#readme",
   "devDependencies": {
+    "copy-webpack-plugin": "^5.0.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   }

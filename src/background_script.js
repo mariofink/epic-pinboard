@@ -44,3 +44,5 @@ async function loadBookmarks() {
       });
   });
 }
+
+window.loadBookmarks = loadBookmarks;

@@ -13,12 +13,12 @@
     "64": "icons/icon.png"
   },
   "background": {
-    "scripts": ["background_script.js"]
+    "scripts": ["background.bundle.js"]
   },
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["content_script.js"]
+      "js": ["content.bundle.js"]
     }
   ],
   "browser_action": {
