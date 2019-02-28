@@ -1,5 +1,6 @@
 import PinboardService from "./services/pinboardService";
-const svc = new PinboardService();
+const baseApiUrl = "https://api.pinboard.in/v1";
+const svc = new PinboardService(baseApiUrl);
 
 function retrieveApiToken() {
   return new Promise((resolve, reject) => {

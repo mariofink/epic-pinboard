@@ -1,13 +1,11 @@
-const baseApiUrl = "https://api.pinboard.in/v1";
-const requestOptions = {
-  method: "GET"
-};
-
 export default class PinboardService {
+  constructor(baseApiUrl) {
+    this.baseApiUrl = baseApiUrl;
+  }
   login(token) {
-    const url = baseApiUrl + "/user/api_token";
+    const url = this.baseApiUrl + "/user/api_token";
     return new Promise((resolve, reject) => {
-      fetch(url + `?auth_token=${token}`, requestOptions)
+      fetch(url + `?auth_token=${token}`)
         .then(response => {
           resolve(response);
         })
@@ -18,10 +16,10 @@ export default class PinboardService {
   }
 
   loadRecent(token) {
-    const url = baseApiUrl + "/posts/recent";
+    const url = this.baseApiUrl + "/posts/recent";
     console.log("Load bookmarks...", token);
     return new Promise((resolve, reject) => {
-      fetch(url + `?auth_token=${token}`, requestOptions)
+      fetch(url + `?auth_token=${token}`)
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(data => {
