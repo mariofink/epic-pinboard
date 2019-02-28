@@ -4,9 +4,9 @@ const status = document.getElementById("status");
 
 const loadBookmarksButton = document.getElementById("loadBookmarks");
 loadBookmarksButton.addEventListener("click", e => {
-  background.loadBookmarks().then(bookmarks => {
-    bookmarks.map(post => {
-      console.log(post.getAttribute("href"));
+  background.loadBookmarks().then(posts => {
+    posts.map(post => {
+      console.log(post);
       return post;
     });
   });

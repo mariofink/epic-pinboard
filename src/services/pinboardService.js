@@ -1,3 +1,5 @@
+import xmljs from "xml-js";
+
 export default class PinboardService {
   constructor(baseApiUrl) {
     this.baseApiUrl = baseApiUrl;
@@ -21,9 +23,9 @@ export default class PinboardService {
     return new Promise((resolve, reject) => {
       fetch(url + `?auth_token=${token}`)
         .then(response => response.text())
-        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-        .then(data => {
-          const posts = [...data.children[0].children];
+        .then(xmlstring => {
+          const responseObject = xmljs.xml2js(xmlstring);
+          const posts = responseObject.elements[0].elements;
           resolve(posts);
         })
         .catch(err => {

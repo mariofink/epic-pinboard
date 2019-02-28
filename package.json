@@ -20,5 +20,8 @@
     "copy-webpack-plugin": "^5.0.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "xml-js": "^1.6.11"
   }
 }
