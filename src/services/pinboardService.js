@@ -1,4 +1,5 @@
 import xmljs from "xml-js";
+import postConverter from "../converters/postConverter";
 
 export default class PinboardService {
   constructor(baseApiUrl) {
@@ -25,7 +26,9 @@ export default class PinboardService {
         .then(response => response.text())
         .then(xmlstring => {
           const responseObject = xmljs.xml2js(xmlstring);
-          const posts = responseObject.elements[0].elements;
+          const posts = responseObject.elements[0].elements.map(post =>
+            postConverter(post)
+          );
           resolve(posts);
         })
         .catch(err => {
