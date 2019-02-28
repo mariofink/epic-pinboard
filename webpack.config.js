@@ -17,6 +17,7 @@ module.exports = {
       { from: "./src/browserAction", to: "browserAction" },
       { from: "./src/icons", to: "icons" },
       { from: "./src/options", to: "options" },
+      { from: "./src/styles", to: "styles" },
       { from: "./src/pageAction", to: "pageAction" },
       { from: "./src/manifest.json", to: "manifest.json" }
     ])
