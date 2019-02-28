@@ -5,6 +5,7 @@ module.exports = {
   mode: "production",
   entry: {
     background: "./src/background_script.js",
+    "browser-action": "./src/browser-action_script.js",
     content: "./src/content_script.js"
   },
   output: {
