@@ -29,7 +29,9 @@ addBookmarkButton.addEventListener("click", e => {
 function addBookmark(form) {
   const bookmark = {
     url: form.url.value,
-    title: form.title.value
+    title: form.title.value,
+    tags: form.tags.value,
+    notes: form.notes.value
   };
   background.addBookmark(bookmark).then(response => {
     console.log("added bookmark", response);

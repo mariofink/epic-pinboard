@@ -1,9 +1,8 @@
-.bookmarks-list {
-  list-style: none;
-  padding: 0;
+form label {
+  display: block;
 }
 
-.bookmarks-list li {
-  border-top: 1px solid #ccc;
-  padding: 0.5rem;
+form input,
+form textarea {
+  width: 100%;
 }
