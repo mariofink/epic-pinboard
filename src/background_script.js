@@ -20,5 +20,6 @@ async function loadBookmarks() {
   return svc.loadRecent(token);
 }
 
+window.retrieveApiToken = retrieveApiToken;
 window.loadBookmarks = loadBookmarks;
 window.login = login;

@@ -7,7 +7,15 @@
   </head>
   <body>
     <h1>Pinboard++</h1>
-    <button type="button" id="manageBookmarks">Manage bookmarks</button>
+    <div id="notoken" style="display: none;">
+      <p>
+        Please provide your Pinboard API token in the options.
+      </p>
+      <button type="button" id="openOptions">Open Pinboard++ options</button>
+    </div>
+    <div id="token">
+      <button type="button" id="manageBookmarks">Manage bookmarks</button>
+    </div>
     <script src="../browser-action.bundle.js"></script>
   </body>
 </html>
