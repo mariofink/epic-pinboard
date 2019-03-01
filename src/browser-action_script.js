@@ -18,7 +18,15 @@ openOptionsButton.addEventListener("click", () => {
 const addBookmarksForm = document.getElementById("addBoomarkForm");
 addBookmarksForm.addEventListener("submit", e => {
   e.preventDefault();
-  const form = e.target;
+  addBookmark(addBookmarksForm);
+});
+
+const addBookmarkButton = document.getElementById("addBookmarkButton");
+addBookmarkButton.addEventListener("click", e => {
+  addBookmark(addBookmarksForm);
+});
+
+function addBookmark(form) {
   const bookmark = {
     url: form.url.value,
     title: form.title.value
@@ -26,7 +34,7 @@ addBookmarksForm.addEventListener("submit", e => {
   background.addBookmark(bookmark).then(response => {
     console.log("added bookmark", response);
   });
-});
+}
 
 async function init() {
   const apiToken = await background.retrieveApiToken();
