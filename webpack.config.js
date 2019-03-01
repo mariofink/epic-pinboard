@@ -6,7 +6,8 @@ module.exports = {
   entry: {
     background: "./src/background_script.js",
     "browser-action": "./src/browser-action_script.js",
-    content: "./src/content_script.js"
+    content: "./src/content_script.js",
+    "extension-page": "./src/extension-page_script.js"
   },
   output: {
     filename: "[name].bundle.js",
@@ -15,6 +16,7 @@ module.exports = {
   plugins: [
     new CopyPlugin([
       { from: "./src/browserAction", to: "browserAction" },
+      { from: "./src/extensionPage", to: "extensionPage" },
       { from: "./src/icons", to: "icons" },
       { from: "./src/options", to: "options" },
       { from: "./src/styles", to: "styles" },
