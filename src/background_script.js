@@ -21,8 +21,8 @@ async function loadBookmarks() {
 }
 
 async function addBookmark(bookmark) {
-  console.log("Add bookmark", bookmark);
-  // TODO: implement me ^^
+  const token = await retrieveApiToken();
+  return svc.addBookmark(token, bookmark);
 }
 
 window.retrieveApiToken = retrieveApiToken;

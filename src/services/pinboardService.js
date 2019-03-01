@@ -37,4 +37,22 @@ export default class PinboardService {
         });
     });
   }
+
+  addBookmark(token, bookmark) {
+    const url = this.baseApiUrl + "/posts/add";
+    return new Promise((resolve, reject) => {
+      fetch(
+        url +
+          `?auth_token=${token}&url=${bookmark.url}&description=${
+            bookmark.title
+          }`
+      )
+        .then(response => {
+          resolve(response);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 }

@@ -23,7 +23,9 @@ addBookmarksForm.addEventListener("submit", e => {
     url: form.url.value,
     title: form.title.value
   };
-  background.addBookmark(bookmark);
+  background.addBookmark(bookmark).then(response => {
+    console.log("added bookmark", response);
+  });
 });
 
 async function init() {
