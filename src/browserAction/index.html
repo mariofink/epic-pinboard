@@ -16,18 +16,20 @@
     <div id="token">
       <h2>Add bookmark</h2>
       <form id="addBoomarkForm">
-        <div class="form-element">
+        <div class="browser-style">
           <label for="url">URL</label>
           <input type="text" name="url" id="url" />
         </div>
-        <div class="form-element">
-          <label for="title">URL</label>
+        <div class="browser-style">
+          <label for="title">Title</label>
           <input type="text" name="title" id="title" />
         </div>
-        <button type="submit">Add bookmark</button>
+        <button class="browser-style" type="submit">Add bookmark</button>
       </form>
       <hr />
-      <button type="button" id="manageBookmarks">Manage bookmarks</button>
+      <button class="browser-style" type="button" id="manageBookmarks">
+        Manage bookmarks
+      </button>
     </div>
     <script src="../browser-action.bundle.js"></script>
   </body>

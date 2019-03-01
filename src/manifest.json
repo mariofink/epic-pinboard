@@ -26,7 +26,8 @@
       "64": "icons/icon.png"
     },
     "default_popup": "browserAction/index.html",
-    "default_title": "Pinboard++"
+    "default_title": "Pinboard++",
+    "browser_style": true
   },
   "page_action": {
     "default_icon": {
