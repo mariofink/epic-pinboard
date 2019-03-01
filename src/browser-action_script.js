@@ -30,7 +30,7 @@ addBookmarksForm.addEventListener("submit", e => {
 
 async function init() {
   const apiToken = await background.retrieveApiToken();
-  if (apiToken.length < 1) {
+  if (typeof apiToken === "undefined" || apiToken.length < 1) {
     document.getElementById("notoken").style.display = "block";
     document.getElementById("token").style.display = "none";
   } else {
