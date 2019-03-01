@@ -20,6 +20,12 @@ async function loadBookmarks() {
   return svc.loadRecent(token);
 }
 
+async function addBookmark(bookmark) {
+  console.log("Add bookmark", bookmark);
+  // TODO: implement me ^^
+}
+
 window.retrieveApiToken = retrieveApiToken;
 window.loadBookmarks = loadBookmarks;
 window.login = login;
+window.addBookmark = addBookmark;
