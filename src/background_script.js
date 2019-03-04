@@ -30,8 +30,14 @@ async function getSuggestedTagsForUrl(bookmarkUrl) {
   return svc.getSuggestedTagsForUrl(token, bookmarkUrl);
 }
 
+async function getAllTags() {
+  const token = await retrieveApiToken();
+  return svc.getAllTags(token);
+}
+
 window.retrieveApiToken = retrieveApiToken;
 window.loadBookmarks = loadBookmarks;
 window.login = login;
 window.addBookmark = addBookmark;
 window.getSuggestedTagsForUrl = getSuggestedTagsForUrl;
+window.getAllTags = getAllTags;

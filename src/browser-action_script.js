@@ -47,6 +47,9 @@ async function init() {
     document.getElementById("notoken").style.display = "none";
     document.getElementById("token").style.display = "block";
     fillAddBookmarkForm();
+    background.getAllTags().then(tags => {
+      console.log("all your tags are belong to us", tags);
+    });
   }
 }
 
