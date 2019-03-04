@@ -18,10 +18,13 @@
   "homepage": "https://github.com/mariofink/pinboard-plusplus#readme",
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.0",
+    "css-loader": "^2.1.0",
+    "mini-css-extract-plugin": "^0.5.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "awesomplete": "^1.1.4",
     "xml-js": "^1.6.11"
   }
 }

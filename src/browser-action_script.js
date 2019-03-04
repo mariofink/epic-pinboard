@@ -1,3 +1,5 @@
+require("awesomplete/awesomplete.css");
+import Awesomplete from "awesomplete";
 const background = browser.extension.getBackgroundPage();
 
 const manageBookmarksButton = document.getElementById("manageBookmarks");
@@ -47,8 +49,10 @@ async function init() {
     document.getElementById("notoken").style.display = "none";
     document.getElementById("token").style.display = "block";
     fillAddBookmarkForm();
-    background.getAllTags().then(tags => {
-      console.log("all your tags are belong to us", tags);
+    const allTags = await background.getAllTags();
+    console.log("all your tags are belong to us", allTags);
+    new Awesomplete("#tags", {
+      list: allTags.map(tag => tag.tag)
     });
   }
 }
