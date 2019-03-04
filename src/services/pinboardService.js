@@ -1,5 +1,6 @@
 import xmljs from "xml-js";
 import postConverter from "../converters/postConverter";
+import suggestionsConverter from "../converters/suggestionsConverter";
 
 export default class PinboardService {
   constructor(baseApiUrl) {
@@ -33,6 +34,24 @@ export default class PinboardService {
         })
         .catch(err => {
           console.error("Could not load bookmarks", err);
+          reject(err);
+        });
+    });
+  }
+
+  getSuggestedTagsForUrl(token, bookmarkUrl) {
+    const url = this.baseApiUrl + "/posts/suggest";
+    return new Promise((resolve, reject) => {
+      fetch(url + `?auth_token=${token}&url=${bookmarkUrl}`)
+        .then(response => response.text())
+        .then(xmlstring => {
+          const responseObject = xmljs.xml2js(xmlstring);
+          const suggestions = suggestionsConverter(
+            responseObject.elements[0].elements
+          );
+          resolve(suggestions);
+        })
+        .catch(err => {
           reject(err);
         });
     });

@@ -50,11 +50,18 @@ async function init() {
   }
 }
 
-function fillAddBookmarkForm() {
+async function fillAddBookmarkForm() {
   browser.tabs.query({ active: true, currentWindow: true }, tabs => {
     const tab = tabs[0];
-    document.getElementById("url").value = tab.url;
+    const bookmarkUrl = tab.url;
+    document.getElementById("url").value = bookmarkUrl;
     document.getElementById("title").value = tab.title;
+    background.getSuggestedTagsForUrl(bookmarkUrl).then(suggestions => {
+      console.log("SUGGEST", suggestions, bookmarkUrl);
+      document.getElementById("suggested").value = suggestions.recommended.join(
+        " "
+      );
+    });
   });
 }
 
