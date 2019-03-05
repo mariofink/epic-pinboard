@@ -52,7 +52,17 @@ async function init() {
     const allTags = await background.getAllTags();
     console.log("all your tags are belong to us", allTags);
     new Awesomplete("#tags", {
-      list: allTags.map(tag => tag.tag)
+      list: allTags.map(tag => tag.tag),
+      filter: function(text, input) {
+        return Awesomplete.FILTER_CONTAINS(text, input.match(/[^\s]*$/)[0]);
+      },
+      item: function(text, input) {
+        return Awesomplete.ITEM(text, input.match(/[^\s]*$/)[0]);
+      },
+      replace: function(text) {
+        var before = this.input.value.match(/^.+\s\s*|/)[0];
+        this.input.value = before + text + " ";
+      }
     });
   }
 }
