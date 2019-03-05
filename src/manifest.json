@@ -23,7 +23,7 @@
   ],
   "browser_action": {
     "default_icon": {
-      "64": "icons/icon.png"
+      "64": "icons/pinboard.svg"
     },
     "default_popup": "browserAction/index.html",
     "default_title": "Pinboard++",
