@@ -22,7 +22,6 @@ export default class PinboardService {
 
   loadRecent(token) {
     const url = this.baseApiUrl + "/posts/recent";
-    console.log("Load bookmarks...", token);
     return new Promise((resolve, reject) => {
       fetch(url + `?auth_token=${token}`)
         .then(response => response.text())

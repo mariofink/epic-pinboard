@@ -20,7 +20,6 @@ loadBookmarksButton.addEventListener("click", e => {
     `;
     bookmarkContainer.innerHTML = markup;
     posts.map(post => {
-      console.log(post);
       return post;
     });
   });
@@ -32,7 +31,6 @@ loginButton.addEventListener("click", e => {
   background
     .login()
     .then(response => {
-      console.log("RESPONSE", response);
       status.innerHTML = "Successfully logged in";
     })
     .catch(err => {

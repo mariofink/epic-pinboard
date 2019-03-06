@@ -26,7 +26,6 @@ function addBookmark(form) {
     notes: form.notes.value
   };
   background.addBookmark(bookmark).then(response => {
-    console.log("added bookmark", response);
     window.close();
   });
 }
@@ -41,7 +40,6 @@ async function init() {
     document.getElementById("token").style.display = "block";
     fillAddBookmarkForm();
     const allTags = await background.getAllTags();
-    console.log("all your tags are belong to us", allTags);
     new Awesomplete("#tags", {
       list: allTags.map(tag => tag.tag),
       filter: function(text, input) {
@@ -65,7 +63,6 @@ async function fillAddBookmarkForm() {
     document.getElementById("url").value = bookmarkUrl;
     document.getElementById("title").value = tab.title;
     background.getSuggestedTagsForUrl(bookmarkUrl).then(suggestions => {
-      console.log("SUGGEST", suggestions, bookmarkUrl);
       const markup = `
         <ul class="suggested-tags">
         ${suggestions.recommended
