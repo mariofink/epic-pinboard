@@ -1,6 +1,5 @@
 import xmljs from "xml-js";
 import postConverter from "../converters/postConverter";
-import suggestionsConverter from "../converters/suggestionsConverter";
 import tagConverter from "../converters/tagConverter";
 
 export default class PinboardService {
@@ -42,14 +41,9 @@ export default class PinboardService {
   getSuggestedTagsForUrl(token, bookmarkUrl) {
     const url = this.baseApiUrl + "/posts/suggest";
     return new Promise((resolve, reject) => {
-      fetch(url + `?auth_token=${token}&url=${bookmarkUrl}`)
-        .then(response => response.text())
-        .then(xmlstring => {
-          const responseObject = xmljs.xml2js(xmlstring);
-          const suggestions = suggestionsConverter(
-            responseObject.elements[0].elements
-          );
-          resolve(suggestions);
+      fetch(url + `?auth_token=${token}&url=${bookmarkUrl}&format=json`)
+        .then(response => {
+          resolve(response.json());
         })
         .catch(err => {
           reject(err);

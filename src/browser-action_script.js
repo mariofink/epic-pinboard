@@ -65,7 +65,7 @@ async function fillAddBookmarkForm() {
     background.getSuggestedTagsForUrl(bookmarkUrl).then(suggestions => {
       const markup = `
         <ul class="suggested-tags">
-        ${suggestions.recommended
+        ${suggestions[1].recommended
           .map(suggestion => `<li class="suggested-tag">${suggestion}</li>`)
           .join("")}
         </ul>
