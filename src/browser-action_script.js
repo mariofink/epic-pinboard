@@ -83,7 +83,22 @@ async function fillAddBookmarkForm() {
         </ul>
         `;
       document.getElementById("suggestedTags").innerHTML = markup;
+      initTagEvents();
     });
+  });
+}
+
+function tagOnClickHandler(event) {
+  const tagElement = event.target;
+  tagElement.classList.add("active");
+  document.getElementById("tags").value += tagElement.innerHTML + " ";
+  tagElement.removeEventListener("click", tagOnClickHandler);
+}
+
+function initTagEvents() {
+  const tags = document.querySelectorAll(".suggested-tag");
+  tags.forEach(tag => {
+    tag.addEventListener("click", tagOnClickHandler);
   });
 }
 

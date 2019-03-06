@@ -105,6 +105,7 @@ form textarea {
   line-height: 1.5;
 }
 
+.suggested-tag.active,
 .suggested-tag:hover {
   cursor: pointer;
   background: #0060df;
