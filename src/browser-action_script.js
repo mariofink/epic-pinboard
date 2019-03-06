@@ -75,9 +75,14 @@ async function fillAddBookmarkForm() {
     document.getElementById("title").value = tab.title;
     background.getSuggestedTagsForUrl(bookmarkUrl).then(suggestions => {
       console.log("SUGGEST", suggestions, bookmarkUrl);
-      document.getElementById("suggested").value = suggestions.recommended.join(
-        " "
-      );
+      const markup = `
+        <ul class="suggested-tags">
+        ${suggestions.recommended
+          .map(suggestion => `<li class="suggested-tag">${suggestion}</li>`)
+          .join("")}
+        </ul>
+        `;
+      document.getElementById("suggestedTags").innerHTML = markup;
     });
   });
 }
