@@ -41,7 +41,7 @@ async function init() {
     fillAddBookmarkForm();
     const allTags = await background.getAllTags();
     new Awesomplete("#tags", {
-      list: allTags.map(tag => tag.tag),
+      list: Object.keys(allTags),
       filter: function(text, input) {
         return Awesomplete.FILTER_CONTAINS(text, input.match(/[^\s]*$/)[0]);
       },

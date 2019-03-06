@@ -1,6 +1,5 @@
 import xmljs from "xml-js";
 import postConverter from "../converters/postConverter";
-import tagConverter from "../converters/tagConverter";
 
 export default class PinboardService {
   constructor(baseApiUrl) {
@@ -54,14 +53,9 @@ export default class PinboardService {
   getAllTags(token) {
     const url = this.baseApiUrl + "/tags/get";
     return new Promise((resolve, reject) => {
-      fetch(url + `?auth_token=${token}`)
-        .then(response => response.text())
-        .then(xmlstring => {
-          const responseObject = xmljs.xml2js(xmlstring);
-          const tags = responseObject.elements[0].elements.map(tag =>
-            tagConverter(tag)
-          );
-          resolve(tags);
+      fetch(url + `?auth_token=${token}&format=json`)
+        .then(response => {
+          resolve(response.json());
         })
         .catch(err => {
           reject(err);
