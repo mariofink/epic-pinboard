@@ -2,16 +2,6 @@ require("awesomplete/awesomplete.css");
 import Awesomplete from "awesomplete";
 const background = browser.extension.getBackgroundPage();
 
-const manageBookmarksButton = document.getElementById("manageBookmarks");
-manageBookmarksButton.addEventListener("click", e => {
-  browser.windows.create({
-    type: "detached_panel",
-    url: "../extensionPage/index.html",
-    width: 500,
-    height: 250
-  });
-});
-
 const openOptionsButton = document.getElementById("openOptions");
 openOptionsButton.addEventListener("click", () => {
   browser.runtime.openOptionsPage();
