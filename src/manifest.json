@@ -25,7 +25,7 @@
     "default_icon": {
       "64": "icons/pinboard.svg"
     },
-    "default_popup": "browserAction/index.html",
+    "default_popup": "browserAction/index.vue.html",
     "default_title": "Pinboard++",
     "browser_style": true
   },

@@ -1,12 +1,14 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
+  devtool: "source-map",
   entry: {
     background: "./src/background_script.js",
-    "browser-action": "./src/browser-action_script.js",
+    "browser-action": "./src/browser-action_vue.js",
     content: "./src/content_script.js",
     "extension-page": "./src/extension-page_script.js"
   },
@@ -16,6 +18,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: "vue-loader"
+      },
       {
         test: /\.css$/,
         use: [
@@ -33,6 +39,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
