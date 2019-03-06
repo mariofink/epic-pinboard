@@ -27,6 +27,7 @@ function addBookmark(form) {
   };
   background.addBookmark(bookmark).then(response => {
     console.log("added bookmark", response);
+    window.close();
   });
 }
 
