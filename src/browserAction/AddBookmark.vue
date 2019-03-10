@@ -52,7 +52,11 @@
         </form>
       </div>
       <div class="panel-section panel-section-footer">
-        <div class="panel-section-footer-button default" id="addBookmarkButton">Add bookmark</div>
+        <div
+          class="panel-section-footer-button default"
+          id="addBookmarkButton"
+          @click="addBookmark"
+        >Add bookmark</div>
       </div>
     </div>
   </div>
@@ -66,7 +70,8 @@ export default {
       url: "",
       title: "",
       suggestedTags: [],
-      notes: ""
+      notes: "",
+      tags: ""
     };
   },
   async mounted() {
@@ -85,6 +90,18 @@ export default {
     openOptions() {
       browser.runtime.openOptionsPage();
       window.close();
+    },
+    async addBookmark() {
+      const background = await browser.runtime.getBackgroundPage();
+      const bookmark = {
+        url: this.url,
+        title: this.title,
+        tags: this.tags,
+        notes: this.notes
+      };
+      background.addBookmark(bookmark).then(response => {
+        window.close();
+      });
     }
   }
 };
