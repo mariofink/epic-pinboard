@@ -103,7 +103,7 @@ export default {
       const bookmark = {
         url: this.url,
         title: this.title,
-        tags: this.tags,
+        tags: this.tags.map(tag => tag.text).join(" "),
         notes: this.notes
       };
       background.addBookmark(bookmark).then(response => {
