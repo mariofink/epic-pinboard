@@ -114,3 +114,8 @@ form textarea {
   cursor: pointer;
   background: #0060df;
 }
+
+.vue-tags-input .ti-item.ti-selected-item,
+.vue-tags-input .ti-tag {
+  background: hsl(210.3, 100%, 63.5%) !important;
+}
