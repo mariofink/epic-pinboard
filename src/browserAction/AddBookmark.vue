@@ -27,6 +27,7 @@
             <vue-tags-input
               v-model="tag"
               :tags="tags"
+              maxlength="255"
               :autocomplete-items="filteredTags"
               @tags-changed="newTags => tags = newTags"
             />
@@ -121,9 +122,10 @@ export default {
   },
   computed: {
     filteredTags: function() {
-      return this.allTags.filter(tag => {
+      const filtered = this.allTags.filter(tag => {
         return tag.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
+      return filtered.slice(0, 5);
     }
   }
 };
