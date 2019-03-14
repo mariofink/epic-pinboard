@@ -24,14 +24,12 @@
           </div>
           <div class="form-item browser-style">
             <label for="tags">Tags</label>
-            <input
-              type="text"
-              name="tags"
-              id="tags"
-              maxlength="255"
-              data-maxitems="5"
-              data-autofirst="true"
-            >
+            <vue-tags-input
+              v-model="tag"
+              :tags="tags"
+              :autocomplete-items="filteredTags"
+              @tags-changed="newTags => tags = newTags"
+            />
           </div>
           <div class="form-item browser-style">
             <label for="suggested">Suggested Tags</label>
@@ -63,20 +61,29 @@
 </template>
 
 <script>
+import VueTagsInput from "@johmun/vue-tags-input";
+
 export default {
+  components: {
+    VueTagsInput
+  },
   data() {
     return {
       token: "",
+      allTags: [],
       url: "",
       title: "",
       suggestedTags: [],
       notes: "",
-      tags: ""
+      tags: [],
+      tag: ""
     };
   },
   async mounted() {
     const background = await browser.runtime.getBackgroundPage();
     this.token = await background.retrieveApiToken();
+    const allTagsObject = await background.getAllTags();
+    this.allTags = Object.keys(allTagsObject);
     browser.tabs.query({ active: true, currentWindow: true }, tabs => {
       const tab = tabs[0];
       this.url = tab.url;
@@ -101,6 +108,13 @@ export default {
       };
       background.addBookmark(bookmark).then(response => {
         window.close();
+      });
+    }
+  },
+  computed: {
+    filteredTags: function() {
+      return this.allTags.filter(tag => {
+        return tag.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
     }
   }
