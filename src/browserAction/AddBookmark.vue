@@ -34,7 +34,12 @@
           <div class="form-item browser-style">
             <label for="suggested">Suggested Tags</label>
             <ul class="suggested-tags">
-              <li class="suggested-tag" v-for="tag in suggestedTags" :key="tag">{{tag}}</li>
+              <li
+                class="suggested-tag"
+                v-for="tag in suggestedTags"
+                :key="tag"
+                @click="addSuggestedTag(tag)"
+              >{{tag}}</li>
             </ul>
           </div>
           <div class="form-item browser-style">
@@ -97,6 +102,9 @@ export default {
     openOptions() {
       browser.runtime.openOptionsPage();
       window.close();
+    },
+    addSuggestedTag(tag) {
+      this.tags.push({ text: tag });
     },
     async addBookmark() {
       const background = await browser.runtime.getBackgroundPage();
