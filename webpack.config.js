@@ -50,6 +50,7 @@ module.exports = {
       { from: "./src/browserAction", to: "browserAction" },
       { from: "./src/extensionPage", to: "extensionPage" },
       { from: "./src/icons", to: "icons" },
+      { from: "./src/components", to: "components" },
       { from: "./src/options", to: "options" },
       { from: "./src/styles", to: "styles" },
       { from: "./src/pageAction", to: "pageAction" },

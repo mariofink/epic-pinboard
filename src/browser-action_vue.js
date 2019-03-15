@@ -1,5 +1,5 @@
 import Vue from "vue";
-import AddBookmark from "./browserAction/AddBookmark.vue";
+import AddBookmark from "./components/AddBookmark/AddBookmark.vue";
 
 console.log("ADD", AddBookmark);
 new Vue({
