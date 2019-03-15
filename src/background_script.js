@@ -5,7 +5,7 @@ const svc = new PinboardService(baseApiUrl);
 function retrieveApiToken() {
   return new Promise((resolve, reject) => {
     browser.storage.sync.get("apitoken").then(res => {
-      resolve(res.apitoken);
+      resolve(res.apitoken || "");
     });
   });
 }
