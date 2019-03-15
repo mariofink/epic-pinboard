@@ -21,20 +21,15 @@
       "js": ["content.bundle.js"]
     }
   ],
-  "browser_action": {
-    "default_icon": {
-      "64": "icons/pinboard.svg"
-    },
-    "default_popup": "browserAction/index.vue.html",
-    "default_title": "Pinboard++",
-    "browser_style": true
-  },
   "page_action": {
+    "show_matches": ["*://*/*"],
+    "browser_style": true,
     "default_icon": {
-      "64": "icons/icon.png"
+      "19": "icons/pinboard.svg",
+      "38": "icons/pinboard.svg"
     },
     "default_popup": "pageAction/index.html",
-    "default_title": "Pinboard++"
+    "default_title": "Bookmark on Pinboard"
   },
   "options_ui": {
     "page": "options/index.html"

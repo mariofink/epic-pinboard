@@ -2,10 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link href="style.css" rel="stylesheet" />
+    <link href="../styles/global.css" rel="stylesheet" />
+    <link href="../components/AddBookmark/style.css" rel="stylesheet" />
   </head>
   <body>
-    <h1 id="myHeading">Page action</h1>
-    <script src="script.js"></script>
+    <div class="panel-section panel-section-header">
+      <div class="icon-section-header">
+        <img
+          style="width: 32px; height: 32px;"
+          src="../icons/pinboard.svg"
+          alt="Pinboard icon"
+        />
+      </div>
+      <div class="text-section-header">Pinboard++</div>
+    </div>
+    <div id="pinboardAddBookmark"></div>
+    <script src="../page-action.bundle.js"></script>
   </body>
 </html>
