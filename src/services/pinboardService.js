@@ -70,7 +70,9 @@ export default class PinboardService {
         url +
           `?auth_token=${token}&url=${bookmark.url}&description=${
             bookmark.title
-          }&extended=${bookmark.notes}&tags=${bookmark.tags}`
+          }&extended=${bookmark.notes}&tags=${bookmark.tags}&shared=${
+            bookmark.shared
+          }`
       )
         .then(response => {
           resolve(response);

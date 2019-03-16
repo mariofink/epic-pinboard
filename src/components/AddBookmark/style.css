@@ -6,7 +6,16 @@ form label {
   display: block;
 }
 
-form input,
+form label.inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+form input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+form input[type="text"],
 form textarea {
   width: 100%;
 }

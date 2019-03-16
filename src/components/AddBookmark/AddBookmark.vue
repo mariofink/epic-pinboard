@@ -53,6 +53,10 @@
               v-model="notes"
             ></textarea>
           </div>
+          <div class="form-item browser-style">
+            <input type="checkbox" id="private" name="private" v-model="privateBookmark">
+            <label for="private" class="inline">Private bookmark</label>
+          </div>
         </form>
       </div>
       <div class="panel-section panel-section-footer">
@@ -81,6 +85,7 @@ export default {
       title: "",
       suggestedTags: [],
       notes: "",
+      privateBookmark: false,
       tags: [],
       tag: ""
     };
@@ -113,7 +118,8 @@ export default {
         url: this.url,
         title: this.title,
         tags: this.tags.map(tag => tag.text).join(" "),
-        notes: this.notes
+        notes: this.notes,
+        shared: this.privateBookmark ? "no" : "yes"
       };
       background.addBookmark(bookmark).then(response => {
         window.close();
