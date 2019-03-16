@@ -72,7 +72,7 @@ export default class PinboardService {
             bookmark.title
           }&extended=${bookmark.notes}&tags=${bookmark.tags}&shared=${
             bookmark.shared
-          }`
+          }&toread=${bookmark.toread}`
       )
         .then(response => {
           resolve(response);

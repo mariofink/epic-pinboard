@@ -57,6 +57,10 @@
             <input type="checkbox" id="private" name="private" v-model="privateBookmark">
             <label for="private" class="inline">Private bookmark</label>
           </div>
+          <div class="form-item browser-style">
+            <input type="checkbox" id="readlater" name="readlater" v-model="readLater">
+            <label for="readlater" class="inline">Read later</label>
+          </div>
         </form>
       </div>
       <div class="panel-section panel-section-footer">
@@ -87,7 +91,8 @@ export default {
       notes: "",
       privateBookmark: false,
       tags: [],
-      tag: ""
+      tag: "",
+      readLater: false
     };
   },
   async mounted() {
@@ -119,7 +124,8 @@ export default {
         title: this.title,
         tags: this.tags.map(tag => tag.text).join(" "),
         notes: this.notes,
-        shared: this.privateBookmark ? "no" : "yes"
+        shared: this.privateBookmark ? "no" : "yes",
+        toread: this.readLater ? "yes" : "no"
       };
       background.addBookmark(bookmark).then(response => {
         window.close();
