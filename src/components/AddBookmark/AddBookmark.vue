@@ -27,7 +27,6 @@
             <vue-tags-input
               v-model="tag"
               :tags="tags"
-              maxlength="255"
               :autocomplete-items="filteredTags"
               @tags-changed="newTags => tags = newTags"
             />
