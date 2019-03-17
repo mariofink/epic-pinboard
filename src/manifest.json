@@ -41,5 +41,13 @@
     "menus",
     "notifications",
     "storage"
-  ]
+  ],
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Alt+P"
+      },
+      "description": "Add bookmark to Pinboard"
+    }
+  }
 }
