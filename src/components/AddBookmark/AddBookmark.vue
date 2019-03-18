@@ -106,6 +106,18 @@ export default {
       background.getSuggestedTagsForUrl(tab.url).then(suggestions => {
         this.suggestedTags = suggestions[1].recommended;
       });
+      browser.tabs
+        .sendMessage(tab.id, {
+          action: "GET_DESCRIPTION"
+        })
+        .then(
+          description => {
+            this.notes = description;
+          },
+          err => {
+            console.error("err", err);
+          }
+        );
     });
   },
   methods: {

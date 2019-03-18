@@ -1,1 +1,6 @@
-// Put all the javascript code here, that you want to execute after page load.
+browser.runtime.onMessage.addListener(request => {
+  if (request.action === "GET_DESCRIPTION") {
+    let selection = window.getSelection().toString();
+    return Promise.resolve(selection);
+  }
+});
