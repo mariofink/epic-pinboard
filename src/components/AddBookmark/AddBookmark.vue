@@ -111,10 +111,15 @@ export default {
       const tab = tabs[0];
       this.url = tab.url;
       this.title = tab.title;
-      background.getSuggestedTagsForUrl(tab.url).then(suggestions => {
-        this.suggestedTags = suggestions[1].recommended;
-        this.loading = false;
-      });
+      background
+        .getSuggestedTagsForUrl(tab.url)
+        .then(suggestions => {
+          this.suggestedTags = suggestions[1].recommended;
+          this.loading = false;
+        })
+        .catch(err => {
+          this.loading = false;
+        });
       browser.tabs
         .sendMessage(tab.id, {
           action: "GET_DESCRIPTION"

@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Pinboard++",
   "description": "Browser extension for Pinboard.in",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "applications": {
     "gecko": {
       "id": "pinboard-plusplus@mariofink.de",
