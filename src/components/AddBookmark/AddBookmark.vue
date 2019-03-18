@@ -133,9 +133,15 @@ export default {
   },
   computed: {
     filteredTags: function() {
-      const filtered = this.allTags.filter(tag => {
-        return tag.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
-      });
+      const filtered = this.allTags
+        .filter(tag => {
+          return tag.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
+        })
+        .map(tag => {
+          return {
+            text: tag
+          };
+        });
       return filtered.slice(0, 5);
     }
   }
