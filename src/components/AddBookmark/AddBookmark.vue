@@ -12,7 +12,14 @@
       </div>
     </div>
     <div v-else>
-      <div class="panel-section panel-section-formElements">
+      <div v-show="loading">
+        <div class="ball-pulse">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="panel-section panel-section-formElements" v-show="!loading">
         <form id="addBoomarkForm">
           <div class="form-item browser-style">
             <label for="url">URL</label>
@@ -62,7 +69,7 @@
           </div>
         </form>
       </div>
-      <div class="panel-section panel-section-footer">
+      <div class="panel-section panel-section-footer" v-show="!loading">
         <div
           class="panel-section-footer-button default"
           id="addBookmarkButton"
@@ -91,7 +98,8 @@ export default {
       privateBookmark: false,
       tags: [],
       tag: "",
-      readLater: false
+      readLater: false,
+      loading: true
     };
   },
   async mounted() {
@@ -105,6 +113,7 @@ export default {
       this.title = tab.title;
       background.getSuggestedTagsForUrl(tab.url).then(suggestions => {
         this.suggestedTags = suggestions[1].recommended;
+        this.loading = false;
       });
       browser.tabs
         .sendMessage(tab.id, {
