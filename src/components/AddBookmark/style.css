@@ -1,5 +1,6 @@
 body {
   width: 300px;
+  overflow-x: hidden;
 }
 
 form label {
