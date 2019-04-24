@@ -1,6 +1,3 @@
-import xmljs from "xml-js";
-import postConverter from "../converters/postConverter";
-
 export default class PinboardService {
   constructor(baseApiUrl) {
     this.baseApiUrl = baseApiUrl;
@@ -13,25 +10,6 @@ export default class PinboardService {
           resolve(response);
         })
         .catch(err => {
-          reject(err);
-        });
-    });
-  }
-
-  loadRecent(token) {
-    const url = this.baseApiUrl + "/posts/recent";
-    return new Promise((resolve, reject) => {
-      fetch(url + `?auth_token=${token}`)
-        .then(response => response.text())
-        .then(xmlstring => {
-          const responseObject = xmljs.xml2js(xmlstring);
-          const posts = responseObject.elements[0].elements.map(post =>
-            postConverter(post)
-          );
-          resolve(posts);
-        })
-        .catch(err => {
-          console.error("Could not load bookmarks", err);
           reject(err);
         });
     });
