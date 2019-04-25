@@ -1,5 +1,5 @@
 {
-  "name": "pinboard-plusplus",
+  "name": "epic-pinboard",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -10,13 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mariofink/pinboard-plusplus.git"
+    "url": "git+https://github.com/mariofink/epic-pinboard.git"
   },
   "author": "Mario Fink",
   "bugs": {
-    "url": "https://github.com/mariofink/pinboard-plusplus/issues"
+    "url": "https://github.com/mariofink/epic-pinboard/issues"
   },
-  "homepage": "https://github.com/mariofink/pinboard-plusplus#readme",
+  "homepage": "https://github.com/mariofink/epic-pinboard#readme",
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.0",
     "css-loader": "^2.1.0",

@@ -8,7 +8,7 @@
         <div
           class="panel-section-footer-button default"
           @click="openOptions()"
-        >Open Pinboard++ options</div>
+        >Open Epic Pinboard options</div>
       </div>
     </div>
     <div v-else>

@@ -1,5 +1,5 @@
-# 📌 Pinboard++
-A Pinboard extension for Firefox.
+# 📌 Epic Pinboard
+A Pinboard extension with a clean user interface.
 
 ## Build
 
