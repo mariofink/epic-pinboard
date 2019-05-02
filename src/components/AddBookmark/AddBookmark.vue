@@ -74,7 +74,7 @@
           class="panel-section-footer-button default"
           id="addBookmarkButton"
           @click="addBookmark"
-        >Add bookmark</div>
+        >{{ buttonCaption }}</div>
       </div>
     </div>
   </div>
@@ -82,6 +82,9 @@
 
 <script>
 import { VueTagsInput, createTags } from "@johmun/vue-tags-input";
+
+const ctaAddBookmark = "Add bookmark";
+const ctaUpdateBookmark = "Update bookmark";
 
 export default {
   components: {
@@ -99,7 +102,8 @@ export default {
       tags: [],
       tag: "",
       readLater: false,
-      loading: true
+      loading: true,
+      buttonCaption: ctaAddBookmark
     };
   },
   async mounted() {
@@ -113,6 +117,7 @@ export default {
       this.title = tab.title;
       background.getBookmarksForUrl(tab.url).then(bookmarks => {
         if (bookmarks.posts.length > 0) {
+          this.buttonCaption = ctaUpdateBookmark;
           const existingBookmark = bookmarks.posts[0];
           this.title = existingBookmark.description;
           this.notes = existingBookmark.extended;
