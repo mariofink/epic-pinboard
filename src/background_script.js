@@ -25,6 +25,11 @@ async function addBookmark(bookmark) {
   return svc.addBookmark(token, bookmark);
 }
 
+async function getBookmarksForUrl(bookmarkUrl) {
+  const token = await retrieveApiToken();
+  return svc.getBookmarksForUrl(token, bookmarkUrl);
+}
+
 async function getSuggestedTagsForUrl(bookmarkUrl) {
   const token = await retrieveApiToken();
   return svc.getSuggestedTagsForUrl(token, bookmarkUrl);
@@ -41,3 +46,4 @@ window.login = login;
 window.addBookmark = addBookmark;
 window.getSuggestedTagsForUrl = getSuggestedTagsForUrl;
 window.getAllTags = getAllTags;
+window.getBookmarksForUrl = getBookmarksForUrl;

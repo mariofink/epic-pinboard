@@ -28,6 +28,19 @@ export default class PinboardService {
     });
   }
 
+  getBookmarksForUrl(token, bookmarkUrl) {
+    const url = this.baseApiUrl + "/posts/get";
+    return new Promise((resolve, reject) => {
+      fetch(url + `?auth_token=${token}&url=${bookmarkUrl}&format=json`)
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
   getAllTags(token) {
     const url = this.baseApiUrl + "/tags/get";
     return new Promise((resolve, reject) => {

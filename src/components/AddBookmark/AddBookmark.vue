@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import VueTagsInput from "@johmun/vue-tags-input";
+import { VueTagsInput, createTags } from "@johmun/vue-tags-input";
 
 export default {
   components: {
@@ -111,6 +111,35 @@ export default {
       const tab = tabs[0];
       this.url = tab.url;
       this.title = tab.title;
+      background.getBookmarksForUrl(tab.url).then(bookmarks => {
+        if (bookmarks.posts.length > 0) {
+          const existingBookmark = bookmarks.posts[0];
+          this.title = existingBookmark.description;
+          this.notes = existingBookmark.extended;
+          this.privateBookmark = existingBookmark.shared === "no";
+          this.readLater = existingBookmark.toread === "yes";
+          if (existingBookmark.tags.length > 0) {
+            const existingTags = existingBookmark.tags.split(" ");
+            this.tags = existingTags;
+            if (existingTags.length > 0) {
+              this.tags = createTags(existingTags);
+            }
+          }
+        } else {
+          browser.tabs
+            .sendMessage(tab.id, {
+              action: "GET_DESCRIPTION"
+            })
+            .then(
+              description => {
+                this.notes = description;
+              },
+              err => {
+                console.error("err", err);
+              }
+            );
+        }
+      });
       background
         .getSuggestedTagsForUrl(tab.url)
         .then(suggestions => {
@@ -120,18 +149,6 @@ export default {
         .catch(err => {
           this.loading = false;
         });
-      browser.tabs
-        .sendMessage(tab.id, {
-          action: "GET_DESCRIPTION"
-        })
-        .then(
-          description => {
-            this.notes = description;
-          },
-          err => {
-            console.error("err", err);
-          }
-        );
     });
   },
   methods: {
