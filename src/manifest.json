@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Epic Pinboard",
   "description": "Browser extension for Pinboard.in",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applications": {
     "gecko": {
       "id": "epic-pinboard@mariofink.de",
