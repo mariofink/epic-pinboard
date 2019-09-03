@@ -37,7 +37,15 @@ async function getSuggestedTagsForUrl(bookmarkUrl) {
 
 async function getAllTags() {
   const token = await retrieveApiToken();
-  return svc.getAllTags(token);
+  const allTags = await svc.getAllTags(token);
+  const tagArray = Object.keys(allTags).map(k => {
+    return { name: k, count: allTags[k] };
+  });
+  const tagsByCount = tagArray.sort((a, b) => {
+    return b.count - a.count;
+  });
+  console.log(allTags, tagsByCount, "---");
+  return tagsByCount;
 }
 
 window.retrieveApiToken = retrieveApiToken;

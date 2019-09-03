@@ -110,7 +110,7 @@ export default {
     const background = await browser.runtime.getBackgroundPage();
     this.token = await background.retrieveApiToken();
     const allTagsObject = await background.getAllTags();
-    this.allTags = Object.keys(allTagsObject);
+    this.allTags = allTagsObject.map(i => i.name);
     browser.tabs.query({ active: true, currentWindow: true }, tabs => {
       const tab = tabs[0];
       this.url = tab.url;
@@ -181,6 +181,7 @@ export default {
   },
   computed: {
     filteredTags: function() {
+      console.log(this.allTags);
       const filtered = this.allTags
         .filter(tag => {
           return tag.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
