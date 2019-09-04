@@ -181,10 +181,9 @@ export default {
   },
   computed: {
     filteredTags: function() {
-      console.log(this.allTags);
       const filtered = this.allTags
         .filter(tag => {
-          return tag.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
+          return tag.toLowerCase().startsWith(this.tag.toLowerCase());
         })
         .map(tag => {
           return {

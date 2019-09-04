@@ -44,7 +44,6 @@ async function getAllTags() {
   const tagsByCount = tagArray.sort((a, b) => {
     return b.count - a.count;
   });
-  console.log(allTags, tagsByCount, "---");
   return tagsByCount;
 }
 
