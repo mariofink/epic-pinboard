@@ -47,6 +47,28 @@ async function getAllTags() {
   return tagsByCount;
 }
 
+browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
+  if (changeInfo.url) {
+    getBookmarksForUrl(tab.url)
+      .then(bookmarks => {
+        if (bookmarks.posts.length > 0) {
+          browser.pageAction.setIcon({
+            tabId: tab.id,
+            path: "icons/pinboard.svg"
+          });
+        } else {
+          browser.pageAction.setIcon({
+            tabId: tab.id,
+            path: "icons/pinboard_inactive.svg"
+          });
+        }
+      })
+      .finally(e => {
+        console.warn("Error while getting bookmarks", e);
+      });
+  }
+});
+
 window.retrieveApiToken = retrieveApiToken;
 window.loadBookmarks = loadBookmarks;
 window.login = login;
