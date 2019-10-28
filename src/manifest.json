@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Epic Pinboard",
   "description": "Browser extension for Pinboard.in",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "applications": {
     "gecko": {
       "id": "epic-pinboard@mariofink.de",
@@ -26,8 +26,8 @@
     "show_matches": ["*://*/*"],
     "browser_style": true,
     "default_icon": {
-      "19": "icons/pinboard.svg",
-      "38": "icons/pinboard.svg"
+      "19": "icons/pinboard_inactive.svg",
+      "38": "icons/pinboard_inactive.svg"
     },
     "default_popup": "pageAction/index.html",
     "default_title": "Bookmark on Pinboard"
