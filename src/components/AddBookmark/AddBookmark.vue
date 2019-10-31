@@ -83,6 +83,14 @@
 <script>
 import { VueTagsInput, createTags } from "@johmun/vue-tags-input";
 
+function getActiveTab() {
+  return new Promise((resolve, reject) => {
+    browser.tabs.query({ active: true, currentWindow: true }, tabs => {
+      resolve(tabs[0])
+    });
+  });
+}
+
 const ctaAddBookmark = "Add bookmark";
 const ctaUpdateBookmark = "Update bookmark";
 
@@ -111,8 +119,7 @@ export default {
     this.token = await background.retrieveApiToken();
     const allTagsObject = await background.getAllTags();
     this.allTags = allTagsObject.map(i => i.name);
-    browser.tabs.query({ active: true, currentWindow: true }, tabs => {
-      const tab = tabs[0];
+    getActiveTab().then(tab => {
       this.url = tab.url;
       this.title = tab.title;
       background.getBookmarksForUrl(tab.url).then(bookmarks => {
@@ -175,6 +182,9 @@ export default {
         toread: this.readLater ? "yes" : "no"
       };
       background.addBookmark(bookmark).then(response => {
+        getActiveTab().then(tab => {
+          background.setActiveIcon(true, tab.id);
+        })
         window.close();
       });
     }

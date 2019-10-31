@@ -47,20 +47,22 @@ async function getAllTags() {
   return tagsByCount;
 }
 
+function setActiveIcon(active, tabId) {
+  const path = active ? "icons/pinboard.svg" : "icons/pinboard_inactive.svg";
+  browser.pageAction.setIcon({
+    tabId,
+    path
+  });
+}
+
 browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
   if (changeInfo.url) {
     getBookmarksForUrl(tab.url)
       .then(bookmarks => {
         if (bookmarks.posts.length > 0) {
-          browser.pageAction.setIcon({
-            tabId: tab.id,
-            path: "icons/pinboard.svg"
-          });
+          setActiveIcon(true, tab.id);
         } else {
-          browser.pageAction.setIcon({
-            tabId: tab.id,
-            path: "icons/pinboard_inactive.svg"
-          });
+          setActiveIcon(false, tab.id);
         }
       })
       .finally(e => {
@@ -76,3 +78,4 @@ window.addBookmark = addBookmark;
 window.getSuggestedTagsForUrl = getSuggestedTagsForUrl;
 window.getAllTags = getAllTags;
 window.getBookmarksForUrl = getBookmarksForUrl;
+window.setActiveIcon = setActiveIcon;
