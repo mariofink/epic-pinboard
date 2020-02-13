@@ -1,7 +1,0 @@
-{
-  "extends": ["onepass"],
-  "env": {
-    "browser": true,
-    "webextensions": true
-  }
-}
