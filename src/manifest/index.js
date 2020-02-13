@@ -27,25 +27,15 @@ const manifestInput = {
   content_security_policy: "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
   "__chrome|firefox__author": "mariofink",
-  __opera__developer: {
-    name: "mariofink",
-  },
-
-  __firefox__applications: {
-    gecko: { id: "{754FB1AD-CC3B-4856-B6A0-7786F8CA9D17}" },
-  },
 
   __chrome__minimum_chrome_version: "49",
-  __opera__minimum_opera_version: "36",
 
   page_action: {
     show_matches: ["*://*/*"],
     browser_style: true,
     default_icon: {
       "16": "assets/icons/icon.png",
-      "19": "icons/pinboard_inactive.svg",
       "32": "assets/icons/pinboard-icon_32.png",
-      "38": "icons/pinboard_inactive.svg",
       "48": "assets/icons/pinboard-icon_48.png",
       "128": "assets/icons/pinboard-icon_128.png",
     },
