@@ -5,10 +5,9 @@
         <p>Please provide your Pinboard API token in the options.</p>
       </div>
       <div class="panel-section panel-section-footer">
-        <div
-          class="panel-section-footer-button default"
-          @click="openOptions()"
-        >Open Epic Pinboard options</div>
+        <div class="panel-section-footer-button default" @click="openOptions()">
+          Open Epic Pinboard options
+        </div>
       </div>
     </div>
     <div v-else>
@@ -23,11 +22,23 @@
         <form id="addBoomarkForm">
           <div class="form-item browser-style">
             <label for="url">URL</label>
-            <input type="text" name="url" id="url" maxlength="2000" v-model="url">
+            <input
+              type="text"
+              name="url"
+              id="url"
+              maxlength="2000"
+              v-model="url"
+            />
           </div>
           <div class="form-item browser-style">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" maxlength="255" v-model="title">
+            <input
+              type="text"
+              name="title"
+              id="title"
+              maxlength="255"
+              v-model="title"
+            />
           </div>
           <div class="form-item browser-style">
             <label for="tags">Tags</label>
@@ -35,7 +46,7 @@
               v-model="tag"
               :tags="tags"
               :autocomplete-items="filteredTags"
-              @tags-changed="newTags => tags = newTags"
+              @tags-changed="newTags => (tags = newTags)"
             />
           </div>
           <div class="form-item browser-style">
@@ -46,7 +57,9 @@
                 v-for="tag in suggestedTags"
                 :key="tag"
                 @click="addSuggestedTag(tag)"
-              >{{tag}}</li>
+              >
+                {{ tag }}
+              </li>
             </ul>
           </div>
           <div class="form-item browser-style">
@@ -60,11 +73,21 @@
             ></textarea>
           </div>
           <div class="form-item browser-style">
-            <input type="checkbox" id="private" name="private" v-model="privateBookmark">
+            <input
+              type="checkbox"
+              id="private"
+              name="private"
+              v-model="privateBookmark"
+            />
             <label for="private" class="inline">Private bookmark</label>
           </div>
           <div class="form-item browser-style">
-            <input type="checkbox" id="readlater" name="readlater" v-model="readLater">
+            <input
+              type="checkbox"
+              id="readlater"
+              name="readlater"
+              v-model="readLater"
+            />
             <label for="readlater" class="inline">Read later</label>
           </div>
         </form>
@@ -74,19 +97,22 @@
           class="panel-section-footer-button default"
           id="addBookmarkButton"
           @click="addBookmark"
-        >{{ buttonCaption }}</div>
+        >
+          {{ buttonCaption }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import browser from "webextension-polyfill";
 import { VueTagsInput, createTags } from "@johmun/vue-tags-input";
 
 function getActiveTab() {
   return new Promise((resolve, reject) => {
     browser.tabs.query({ active: true, currentWindow: true }, tabs => {
-      resolve(tabs[0])
+      resolve(tabs[0]);
     });
   });
 }
@@ -96,7 +122,7 @@ const ctaUpdateBookmark = "Update bookmark";
 
 export default {
   components: {
-    VueTagsInput
+    VueTagsInput,
   },
   data() {
     return {
@@ -111,7 +137,7 @@ export default {
       tag: "",
       readLater: false,
       loading: true,
-      buttonCaption: ctaAddBookmark
+      buttonCaption: ctaAddBookmark,
     };
   },
   async mounted() {
@@ -140,7 +166,7 @@ export default {
         } else {
           browser.tabs
             .sendMessage(tab.id, {
-              action: "GET_DESCRIPTION"
+              action: "GET_DESCRIPTION",
             })
             .then(
               description => {
@@ -179,15 +205,15 @@ export default {
         tags: this.tags.map(tag => tag.text).join(" "),
         notes: this.notes,
         shared: this.privateBookmark ? "no" : "yes",
-        toread: this.readLater ? "yes" : "no"
+        toread: this.readLater ? "yes" : "no",
       };
       background.addBookmark(bookmark).then(response => {
         getActiveTab().then(tab => {
           background.setActiveIcon(true, tab.id);
-        })
+        });
         window.close();
       });
-    }
+    },
   },
   computed: {
     filteredTags: function() {
@@ -197,12 +223,11 @@ export default {
         })
         .map(tag => {
           return {
-            text: tag
+            text: tag,
           };
         });
       return filtered.slice(0, 5);
-    }
-  }
+    },
+  },
 };
 </script>
-

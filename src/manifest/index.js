@@ -26,6 +26,10 @@ const manifestInput = {
   ],
   content_security_policy: "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
+  __firefox__applications: {
+    gecko: { id: "epic-pinboard@mariofink.de" },
+  },
+
   "__chrome|firefox__author": "mariofink",
 
   __chrome__minimum_chrome_version: "49",
