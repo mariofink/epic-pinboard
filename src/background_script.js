@@ -47,10 +47,12 @@ async function getAllTags() {
   return tagsByCount;
 }
 
-function setActiveIcon(active, tabId) {
-  const path = active ? "icons/pinboard.svg" : "icons/pinboard_inactive.svg";
+function setActiveIcon(params) {
+  const path = params.active
+    ? "icons/pinboard.svg"
+    : "icons/pinboard_inactive.svg";
   browser.pageAction.setIcon({
-    tabId,
+    tabId: params.tabId,
     path
   });
 }
@@ -60,9 +62,9 @@ browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
     getBookmarksForUrl(tab.url)
       .then(bookmarks => {
         if (bookmarks.posts.length > 0) {
-          setActiveIcon(true, tab.id);
+          setActiveIcon({ active: true, tabId: tab.id });
         } else {
-          setActiveIcon(false, tab.id);
+          setActiveIcon({ active: false, tabId: tab.id });
         }
       })
       .finally(e => {
@@ -71,11 +73,23 @@ browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
   }
 });
 
-window.retrieveApiToken = retrieveApiToken;
-window.loadBookmarks = loadBookmarks;
-window.login = login;
-window.addBookmark = addBookmark;
-window.getSuggestedTagsForUrl = getSuggestedTagsForUrl;
-window.getAllTags = getAllTags;
-window.getBookmarksForUrl = getBookmarksForUrl;
-window.setActiveIcon = setActiveIcon;
+const actions = {
+  retrieveApiToken,
+  loadBookmarks,
+  login,
+  addBookmark,
+  getSuggestedTagsForUrl,
+  getAllTags,
+  getBookmarksForUrl,
+  setActiveIcon
+};
+
+browser.runtime.onMessage.addListener((message, sender, response) => {
+  const action = actions[message.action];
+  if (typeof action === "function") {
+    return action(message.payload);
+  } else {
+    console.warn(`action ${message.action} not supported`);
+    return;
+  }
+});

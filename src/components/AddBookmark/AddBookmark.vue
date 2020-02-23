@@ -140,45 +140,53 @@ export default {
     };
   },
   async mounted() {
-    const background = await browser.runtime.getBackgroundPage();
-    this.token = await background.retrieveApiToken();
-    const allTagsObject = await background.getAllTags();
+    this.token = await browser.runtime.sendMessage({
+      action: "retrieveApiToken"
+    });
+    const allTagsObject = await browser.runtime.sendMessage({
+      action: "getAllTags"
+    });
     this.allTags = allTagsObject.map(i => i.name);
     getActiveTab().then(tab => {
       this.url = tab.url;
       this.title = tab.title;
-      background.getBookmarksForUrl(tab.url).then(bookmarks => {
-        if (bookmarks.posts.length > 0) {
-          this.buttonCaption = ctaUpdateBookmark;
-          const existingBookmark = bookmarks.posts[0];
-          this.title = existingBookmark.description;
-          this.notes = existingBookmark.extended;
-          this.privateBookmark = existingBookmark.shared === "no";
-          this.readLater = existingBookmark.toread === "yes";
-          if (existingBookmark.tags.length > 0) {
-            const existingTags = existingBookmark.tags.split(" ");
-            this.tags = existingTags;
-            if (existingTags.length > 0) {
-              this.tags = createTags(existingTags);
-            }
-          }
-        } else {
-          browser.tabs
-            .sendMessage(tab.id, {
-              action: "GET_DESCRIPTION"
-            })
-            .then(
-              description => {
-                this.notes = description;
-              },
-              err => {
-                console.error("err", err);
+      browser.runtime
+        .sendMessage({ action: "getBookmarksForUrl" })
+        .then(bookmarks => {
+          if (bookmarks.posts.length > 0) {
+            this.buttonCaption = ctaUpdateBookmark;
+            const existingBookmark = bookmarks.posts[0];
+            this.title = existingBookmark.description;
+            this.notes = existingBookmark.extended;
+            this.privateBookmark = existingBookmark.shared === "no";
+            this.readLater = existingBookmark.toread === "yes";
+            if (existingBookmark.tags.length > 0) {
+              const existingTags = existingBookmark.tags.split(" ");
+              this.tags = existingTags;
+              if (existingTags.length > 0) {
+                this.tags = createTags(existingTags);
               }
-            );
-        }
-      });
-      background
-        .getSuggestedTagsForUrl(tab.url)
+            }
+          } else {
+            browser.tabs
+              .sendMessage(tab.id, {
+                action: "GET_DESCRIPTION"
+              })
+              .then(
+                description => {
+                  this.notes = description;
+                },
+                err => {
+                  console.error("err", err);
+                }
+              );
+          }
+        });
+      browser.runtime
+        .sendMessage({
+          action: "getSuggestedTagsForUrl",
+          payload: tab.url
+        })
         .then(suggestions => {
           this.suggestedTags = suggestions[1].recommended;
           this.loading = false;
@@ -197,7 +205,6 @@ export default {
       this.tags.push({ text: tag });
     },
     async addBookmark() {
-      const background = await browser.runtime.getBackgroundPage();
       const bookmark = {
         url: this.url,
         title: this.title,
@@ -206,12 +213,20 @@ export default {
         shared: this.privateBookmark ? "no" : "yes",
         toread: this.readLater ? "yes" : "no"
       };
-      background.addBookmark(bookmark).then(response => {
-        getActiveTab().then(tab => {
-          background.setActiveIcon(true, tab.id);
+      browser.runtime
+        .sendMessage({
+          action: "addBookmark",
+          payload: bookmark
+        })
+        .then(response => {
+          getActiveTab().then(tab => {
+            browser.runtime.sendMessage({
+              action: "setActiveIcon",
+              payload: { active: true, tabId: tab.id }
+            });
+          });
+          window.close();
         });
-        window.close();
-      });
     }
   },
   computed: {
