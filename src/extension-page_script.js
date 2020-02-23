@@ -11,9 +11,7 @@ loadBookmarksButton.addEventListener("click", e => {
     ${posts
       .map(
         post =>
-          `<li><a target="_blank" href="${post.href}">${
-            post.description
-          }</a></li>`
+          `<li><a target="_blank" href="${post.href}">${post.description}</a></li>`
       )
       .join("")}
     </ul>

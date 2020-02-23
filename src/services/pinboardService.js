@@ -59,11 +59,7 @@ export default class PinboardService {
     return new Promise((resolve, reject) => {
       fetch(
         url +
-          `?auth_token=${token}&url=${bookmark.url}&description=${
-            bookmark.title
-          }&extended=${bookmark.notes}&tags=${bookmark.tags}&shared=${
-            bookmark.shared
-          }&toread=${bookmark.toread}`
+          `?auth_token=${token}&url=${bookmark.url}&description=${bookmark.title}&extended=${bookmark.notes}&tags=${bookmark.tags}&shared=${bookmark.shared}&toread=${bookmark.toread}`
       )
         .then(response => {
           resolve(response);
