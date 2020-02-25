@@ -195,6 +195,11 @@ export default {
           this.loading = false;
         });
     });
+    browser.commands.onCommand.addListener(command => {
+      if (command === "submit_add_bookmark_form") {
+        this.addBookmark();
+      }
+    });
   },
   methods: {
     openOptions() {

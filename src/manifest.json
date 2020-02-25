@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Epic Pinboard",
   "description": "Browser extension for Pinboard.in",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "applications": {
     "gecko": {
       "id": "epic-pinboard@mariofink.de",
@@ -49,6 +49,11 @@
         "default": "Alt+P"
       },
       "description": "Add bookmark to Pinboard"
+    },
+    "submit_add_bookmark_form": {
+      "suggested_key": {
+        "default": "Alt+A"
+      }
     }
   }
 }
