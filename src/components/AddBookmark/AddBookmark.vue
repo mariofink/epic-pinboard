@@ -151,7 +151,7 @@ export default {
       this.url = tab.url;
       this.title = tab.title;
       browser.runtime
-        .sendMessage({ action: "getBookmarksForUrl" })
+        .sendMessage({ action: "getBookmarksForUrl", payload: tab.url })
         .then(bookmarks => {
           if (bookmarks.posts.length > 0) {
             this.buttonCaption = ctaUpdateBookmark;
