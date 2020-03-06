@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-  </head>
-  <body>
-    <h1>Epic Pinboard options</h1>
+
+<head>
+  <meta charset="UTF-8" />
+</head>
+
+<body>
+  <div class="panel-section panel-section-header">
+    <p>Please provide your <a href="https://pinboard.in/settings/password">Pinboard API token</a> below:</p>
+  </div>
+  <div class="panel-section panel-section-formElements">
     <form>
-      <label for="apitoken">API Token</label>
-      <input type="password" id="apitoken" name="apitoken" />
-      <button type="submit">Save API Token</button>
+      <div class="form-item browser-style">
+        <label for="apitoken">API Token</label>
+        <input type="password" id="apitoken" name="apitoken" size="30" placeholder="Pinboard API token" />
+      </div>
+      <button class="browser-style" style="margin-top: 1rem;" type="submit">Save API Token</button>
     </form>
-    <script src="script.js"></script>
-  </body>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
