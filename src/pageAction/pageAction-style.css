@@ -1,0 +1,22 @@
+body {
+  width: 300px;
+  overflow-x: hidden;
+}
+
+form label {
+  display: block;
+}
+
+form label.inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+form input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+form input[type="text"],
+form textarea {
+  width: 100%;
+}

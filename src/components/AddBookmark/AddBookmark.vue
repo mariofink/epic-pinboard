@@ -250,3 +250,34 @@ export default {
   }
 };
 </script>
+
+<style>
+.suggested-tags {
+  list-style: none;
+  padding: 0;
+}
+
+.suggested-tag {
+  background: hsl(210.3, 100%, 63.5%);
+  color: white;
+  border-radius: 4px;
+  padding: 0.25rem 0.75rem;
+  margin-top: 0.25rem;
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5;
+}
+
+.suggested-tag.active,
+.suggested-tag:hover {
+  cursor: pointer;
+  background: #0060df;
+}
+
+.vue-tags-input .ti-item.ti-selected-item,
+.vue-tags-input .ti-tag {
+  background: hsl(210.3, 100%, 63.5%) !important;
+}
+</style>
