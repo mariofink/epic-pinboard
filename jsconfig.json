@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "checkJs": true,
+  },
+  "include": [
+    "./*.js",
+    "./src/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "web-ext-artifacts",
+    "dist"
+  ],
+  "module": "es6"
+}
