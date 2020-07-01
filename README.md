@@ -6,10 +6,14 @@ A Pinboard extension with a clean user interface.
 
     npm install
 
-## Build
+## Development
 
-    npm run build
+    npm run dev
 
-This creates the Firefox extension in the dist folder. You can test it from there with [web-ext](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Getting_started_with_web-ext):
+This runs and watches the Webpack build and starts web-ext run to open a Firefox instance that has the extension installed. When you make changes, the extension will be updated automatically.
 
-    web-ext run
+## Building the extension
+
+    npm run build-extension
+
+This bumps the patch version, builds the Webpack bundles and then runs the web-ext build – resulting in a newly built extension zip ready for upload inside the web-ext-artifacts folder.
