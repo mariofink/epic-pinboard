@@ -7,6 +7,9 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "prettier": "prettier --write ./src/**/{*.js,*.vue,*.css}",
+    "web-ext:run": "web-ext run --source-dir=dist --verbose",
+    "web-ext:build": "web-ext build --source-dir=dist",
+    "build-extension": "npm version patch && npm run build && npm run web-ext:build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +28,7 @@
     "prettier": "^2.0.5",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.8",
+    "web-ext": "^4.3.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   },
