@@ -46,7 +46,7 @@
               v-model="tag"
               :tags="tags"
               :autocomplete-items="filteredTags"
-              @tags-changed="newTags => (tags = newTags)"
+              @tags-changed="(newTags) => (tags = newTags)"
             />
           </div>
           <div class="form-item browser-style">
@@ -110,7 +110,7 @@ import { VueTagsInput, createTags } from "@johmun/vue-tags-input";
 
 function getActiveTab() {
   return new Promise((resolve, reject) => {
-    browser.tabs.query({ active: true, currentWindow: true }, tabs => {
+    browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       resolve(tabs[0]);
     });
   });
@@ -121,7 +121,7 @@ const ctaUpdateBookmark = "Update bookmark";
 
 export default {
   components: {
-    VueTagsInput
+    VueTagsInput,
   },
   data() {
     return {
@@ -136,23 +136,23 @@ export default {
       tag: "",
       readLater: false,
       loading: true,
-      buttonCaption: ctaAddBookmark
+      buttonCaption: ctaAddBookmark,
     };
   },
   async mounted() {
     this.token = await browser.runtime.sendMessage({
-      action: "retrieveApiToken"
+      action: "retrieveApiToken",
     });
     const allTagsObject = await browser.runtime.sendMessage({
-      action: "getAllTags"
+      action: "getAllTags",
     });
-    this.allTags = allTagsObject.map(i => i.name);
-    getActiveTab().then(tab => {
+    this.allTags = allTagsObject.map((i) => i.name);
+    getActiveTab().then((tab) => {
       this.url = tab.url;
       this.title = tab.title;
       browser.runtime
         .sendMessage({ action: "getBookmarksForUrl", payload: tab.url })
-        .then(bookmarks => {
+        .then((bookmarks) => {
           if (bookmarks.posts.length > 0) {
             this.buttonCaption = ctaUpdateBookmark;
             const existingBookmark = bookmarks.posts[0];
@@ -170,13 +170,13 @@ export default {
           } else {
             browser.tabs
               .sendMessage(tab.id, {
-                action: "GET_DESCRIPTION"
+                action: "GET_DESCRIPTION",
               })
               .then(
-                description => {
+                (description) => {
                   this.notes = description;
                 },
-                err => {
+                (err) => {
                   console.error("err", err);
                 }
               );
@@ -185,17 +185,17 @@ export default {
       browser.runtime
         .sendMessage({
           action: "getSuggestedTagsForUrl",
-          payload: tab.url
+          payload: tab.url,
         })
-        .then(suggestions => {
+        .then((suggestions) => {
           this.suggestedTags = suggestions[1].recommended;
           this.loading = false;
         })
-        .catch(err => {
+        .catch((err) => {
           this.loading = false;
         });
     });
-    browser.commands.onCommand.addListener(command => {
+    browser.commands.onCommand.addListener((command) => {
       if (command === "submit_add_bookmark_form") {
         this.addBookmark();
       }
@@ -213,41 +213,41 @@ export default {
       const bookmark = {
         url: this.url,
         title: this.title,
-        tags: this.tags.map(tag => tag.text).join(" "),
+        tags: this.tags.map((tag) => tag.text).join(" "),
         notes: this.notes,
         shared: this.privateBookmark ? "no" : "yes",
-        toread: this.readLater ? "yes" : "no"
+        toread: this.readLater ? "yes" : "no",
       };
       browser.runtime
         .sendMessage({
           action: "addBookmark",
-          payload: bookmark
+          payload: bookmark,
         })
-        .then(response => {
-          getActiveTab().then(tab => {
+        .then((response) => {
+          getActiveTab().then((tab) => {
             browser.runtime.sendMessage({
               action: "setActiveIcon",
-              payload: { active: true, tabId: tab.id }
+              payload: { active: true, tabId: tab.id },
             });
           });
           window.close();
         });
-    }
+    },
   },
   computed: {
-    filteredTags: function() {
+    filteredTags: function () {
       const filtered = this.allTags
-        .filter(tag => {
+        .filter((tag) => {
           return tag.toLowerCase().startsWith(this.tag.toLowerCase());
         })
-        .map(tag => {
+        .map((tag) => {
           return {
-            text: tag
+            text: tag,
           };
         });
       return filtered.slice(0, 5);
-    }
-  }
+    },
+  },
 };
 </script>
 

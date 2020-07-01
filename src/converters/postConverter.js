@@ -5,6 +5,6 @@ export default function convertPost(post) {
     hash: post.attributes.hash,
     href: post.attributes.href,
     tag: post.attributes.tag,
-    time: post.attributes.time
+    time: post.attributes.time,
   };
 }

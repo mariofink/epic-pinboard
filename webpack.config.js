@@ -9,17 +9,17 @@ module.exports = {
   entry: {
     background: "./src/background_script.js",
     "page-action": "./src/page-action_vue.js",
-    content: "./src/content_script.js"
+    content: "./src/content_script.js",
   },
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: "vue-loader"
+        loader: "vue-loader",
       },
       {
         test: /\.css$/,
@@ -29,13 +29,13 @@ module.exports = {
             options: {
               // you can specify a publicPath here
               // by default it use publicPath in webpackOptions.output
-              publicPath: "../"
-            }
+              publicPath: "../",
+            },
           },
-          "css-loader"
-        ]
-      }
-    ]
+          "css-loader",
+        ],
+      },
+    ],
   },
   plugins: [
     new VueLoaderPlugin(),
@@ -43,15 +43,17 @@ module.exports = {
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: "[name].css",
-      chunkFilename: "[id].css"
+      chunkFilename: "[id].css",
     }),
-    new CopyPlugin([
-      { from: "./src/pageAction", to: "pageAction" },
-      { from: "./src/icons", to: "icons" },
-      { from: "./src/components", to: "components" },
-      { from: "./src/options", to: "options" },
-      { from: "./src/styles", to: "styles" },
-      { from: "./src/manifest.json", to: "manifest.json" }
-    ])
-  ]
+    new CopyPlugin({
+      patterns: [
+        { from: "./src/pageAction", to: "pageAction" },
+        { from: "./src/icons", to: "icons" },
+        { from: "./src/components", to: "components" },
+        { from: "./src/options", to: "options" },
+        { from: "./src/styles", to: "styles" },
+        { from: "./src/manifest.json", to: "manifest.json" },
+      ],
+    }),
+  ],
 };

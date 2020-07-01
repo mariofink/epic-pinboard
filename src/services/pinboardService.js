@@ -6,10 +6,10 @@ export default class PinboardService {
     const url = this.baseApiUrl + "/user/api_token";
     return new Promise((resolve, reject) => {
       fetch(url + `?auth_token=${token}`)
-        .then(response => {
+        .then((response) => {
           resolve(response);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -19,10 +19,10 @@ export default class PinboardService {
     const url = this.baseApiUrl + "/posts/suggest";
     return new Promise((resolve, reject) => {
       fetch(url + `?auth_token=${token}&url=${bookmarkUrl}&format=json`)
-        .then(response => {
+        .then((response) => {
           resolve(response.json());
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -32,10 +32,10 @@ export default class PinboardService {
     const url = this.baseApiUrl + "/posts/get";
     return new Promise((resolve, reject) => {
       fetch(url + `?auth_token=${token}&url=${bookmarkUrl}&format=json`)
-        .then(response => {
+        .then((response) => {
           resolve(response.json());
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -45,10 +45,10 @@ export default class PinboardService {
     const url = this.baseApiUrl + "/tags/get";
     return new Promise((resolve, reject) => {
       fetch(url + `?auth_token=${token}&format=json`)
-        .then(response => {
+        .then((response) => {
           resolve(response.json());
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -61,10 +61,10 @@ export default class PinboardService {
         url +
           `?auth_token=${token}&url=${bookmark.url}&description=${bookmark.title}&extended=${bookmark.notes}&tags=${bookmark.tags}&shared=${bookmark.shared}&toread=${bookmark.toread}`
       )
-        .then(response => {
+        .then((response) => {
           resolve(response);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
