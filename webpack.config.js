@@ -1,3 +1,4 @@
+const package = require("./package.json");
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -52,7 +53,16 @@ module.exports = {
         { from: "./src/components", to: "components" },
         { from: "./src/options", to: "options" },
         { from: "./src/styles", to: "styles" },
-        { from: "./src/manifest.json", to: "manifest.json" },
+        {
+          from: "./src/manifest.json",
+          to: "manifest.json",
+          transform(buffer) {
+            const manifest = JSON.parse(buffer.toString());
+            // sync the manifest version with the npm package.json version
+            manifest.version = package.version;
+            return JSON.stringify(manifest, null, 2);
+          },
+        },
       ],
     }),
   ],
