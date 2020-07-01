@@ -4,7 +4,7 @@ A Pinboard extension with a clean user interface.
 
 ## Install dependencies
 
-    npm run install
+    npm install
 
 ## Build
 
