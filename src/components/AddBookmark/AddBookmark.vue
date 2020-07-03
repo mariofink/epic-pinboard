@@ -43,6 +43,7 @@
           <div class="form-item browser-style">
             <label for="tags">Tags</label>
             <vue-tags-input
+              ref="tagsInput"
               v-model="tag"
               :tags="tags"
               :autocomplete-items="filteredTags"
@@ -190,6 +191,10 @@ export default {
         .then((suggestions) => {
           this.suggestedTags = suggestions[1].recommended;
           this.loading = false;
+          // see: https://github.com/JohMun/vue-tags-input/issues/65
+          this.$nextTick(() => {
+            this.$refs.tagsInput.$refs.newTagInput.focus();
+          });
         })
         .catch((err) => {
           this.loading = false;
