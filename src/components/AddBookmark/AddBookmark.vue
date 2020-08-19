@@ -236,6 +236,27 @@ export default {
             });
           });
           window.close();
+        })
+        .catch((error) => {
+          if (
+            error.message ===
+            "Conduits:RuntimeMessage: message reply cannot be cloned."
+          ) {
+            // TODO: remove this once the bug in Firefox 79 will be fixed
+            /*
+             * Firefox 79 introduced a bug that currently prevents the popup from closing automatically after adding a new bookmark.
+             * The bookmark will be added to your Pinboard correctly however.
+             * Here is the Firefox bug report: https://bugzilla.mozilla.org/show_bug.cgi?id=1657384
+             * And some more discussion on it: https://discourse.mozilla.org/t/latest-firefox-update-broke-add-on-sendmessage/65159
+             */
+            getActiveTab().then((tab) => {
+              browser.runtime.sendMessage({
+                action: "setActiveIcon",
+                payload: { active: true, tabId: tab.id },
+              });
+            });
+            window.close();
+          }
         });
     },
   },
