@@ -1,5 +1,17 @@
 import urlcat from "urlcat";
 
+function doRequest(url) {
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then((response) => {
+        resolve(response.json());
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 export default class PinboardService {
   constructor(baseApiUrl) {
     this.baseApiUrl = baseApiUrl;
@@ -7,16 +19,9 @@ export default class PinboardService {
   login(token) {
     const url = urlcat(this.baseApiUrl, "/user/api_token", {
       auth_token: token,
+      format: "json",
     });
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((response) => {
-          resolve(response);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    return doRequest(url);
   }
 
   getSuggestedTagsForUrl(token, bookmarkUrl) {
@@ -25,15 +30,7 @@ export default class PinboardService {
       url: bookmarkUrl,
       format: "json",
     });
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((response) => {
-          resolve(response.json());
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    return doRequest(url);
   }
 
   getBookmarksForUrl(token, bookmarkUrl) {
@@ -42,15 +39,7 @@ export default class PinboardService {
       url: bookmarkUrl,
       format: "json",
     });
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((response) => {
-          resolve(response.json());
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    return doRequest(url);
   }
 
   getAllTags(token) {
@@ -58,15 +47,7 @@ export default class PinboardService {
       auth_token: token,
       format: "json",
     });
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((response) => {
-          resolve(response.json());
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    return doRequest(url);
   }
 
   addBookmark(token, bookmark) {
@@ -78,15 +59,8 @@ export default class PinboardService {
       tags: bookmark.tags,
       shared: bookmark.shared,
       toread: bookmark.toread,
+      format: "json",
     });
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((response) => {
-          resolve(response);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    return doRequest(url);
   }
 }
