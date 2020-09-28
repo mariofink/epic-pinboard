@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@johmun/vue-tags-input": "^2.0.1",
+    "urlcat": "^2.0.2",
     "vue": "^2.6.8",
     "xml-js": "^1.6.11"
   }
