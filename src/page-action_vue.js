@@ -7,5 +7,5 @@ new Vue({
   render(h) {
     return h("AddBookmark");
   },
-  components: { AddBookmark }
+  components: { AddBookmark },
 });

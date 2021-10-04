@@ -1,4 +1,4 @@
-browser.runtime.onMessage.addListener(request => {
+browser.runtime.onMessage.addListener((request) => {
   if (request.action === "GET_DESCRIPTION") {
     let description = window.getSelection().toString();
     if (description.length < 1) {

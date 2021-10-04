@@ -4,7 +4,7 @@ const svc = new PinboardService(baseApiUrl);
 
 function retrieveApiToken() {
   return new Promise((resolve, reject) => {
-    browser.storage.sync.get("apitoken").then(res => {
+    browser.storage.sync.get("apitoken").then((res) => {
       resolve(res.apitoken || "");
     });
   });
@@ -38,7 +38,7 @@ async function getSuggestedTagsForUrl(bookmarkUrl) {
 async function getAllTags() {
   const token = await retrieveApiToken();
   const allTags = await svc.getAllTags(token);
-  const tagArray = Object.keys(allTags).map(k => {
+  const tagArray = Object.keys(allTags).map((k) => {
     return { name: k, count: allTags[k] };
   });
   const tagsByCount = tagArray.sort((a, b) => {
@@ -53,21 +53,21 @@ function setActiveIcon(params) {
     : "icons/pinboard_inactive.svg";
   browser.pageAction.setIcon({
     tabId: params.tabId,
-    path
+    path,
   });
 }
 
 browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
   if (changeInfo.url) {
     getBookmarksForUrl(tab.url)
-      .then(bookmarks => {
+      .then((bookmarks) => {
         if (bookmarks.posts.length > 0) {
           setActiveIcon({ active: true, tabId: tab.id });
         } else {
           setActiveIcon({ active: false, tabId: tab.id });
         }
       })
-      .finally(e => {
+      .finally((e) => {
         console.warn("Error while getting bookmarks", e);
       });
   }
@@ -81,7 +81,7 @@ const actions = {
   getSuggestedTagsForUrl,
   getAllTags,
   getBookmarksForUrl,
-  setActiveIcon
+  setActiveIcon,
 };
 
 browser.runtime.onMessage.addListener((message, sender, response) => {
