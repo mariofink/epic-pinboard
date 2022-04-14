@@ -23,21 +23,21 @@
   },
   "homepage": "https://github.com/mariofink/epic-pinboard#readme",
   "devDependencies": {
-    "copy-webpack-plugin": "^9.0.1",
-    "css-loader": "^6.3.0",
-    "mini-css-extract-plugin": "^2.3.0",
+    "copy-webpack-plugin": "^10.2.4",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "2.4.1",
-    "vue-loader": "^15.7.0",
+    "prettier": "^2.6.2",
+    "vue-loader": "^17.0.0",
     "vue-template-compiler": "^2.6.8",
-    "web-ext": "^6.4.0",
-    "webpack": "^5.56.1",
-    "webpack-cli": "^4.8.0"
+    "web-ext": "^6.8.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "@johmun/vue-tags-input": "^2.0.1",
     "urlcat": "^2.0.2",
-    "vue": "^2.6.8",
+    "vue": "^3.2.33",
     "xml-js": "^1.6.11"
   }
 }
